@@ -23,7 +23,7 @@ There is no tap level and no threshold that resolves this. Subscribing to the HI
 
 ## Installation
 
-```
+```bash
 swiftc -O betterswitch.swift -o betterswitch   # requires Xcode CLT: xcode-select --install
 sudo mv betterswitch /usr/local/bin/
 /usr/local/bin/betterswitch                    # first run triggers the permission prompt
@@ -35,15 +35,13 @@ Then set the Globe key to do nothing of its own:
 
 **System Settings → Keyboard → "Press 🌐 key to"** → **Do Nothing**.
 
-That is the only setting the utility needs. Do **not** also set the Globe key to "No Action" under **Keyboard Shortcuts → Modifier Keys** — that disables Fn as a modifier altogether, so Fn+Backspace (forward delete), Fn+arrows (Home/End/PgUp/PgDn) and Fn+F-keys stop working. The utility reads the Fn element straight off the HID device regardless of the modifier mapping, so leave it at "🌐 Globe".
-
 On startup the utility prints how many input sources are in the cycle, and warns if the Fn element was not found on any device. Run with `--verbose` to list the HID devices and which one carries the element.
 
 ## Run at login
 
 Copy the LaunchAgent plist and load it:
 
-```
+```bash
 cp com.user.betterswitch.plist ~/Library/LaunchAgents/
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.user.betterswitch.plist
 ```
